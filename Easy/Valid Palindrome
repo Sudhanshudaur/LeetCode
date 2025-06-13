@@ -1,0 +1,53 @@
+//////////////////////////////////////////////// SOLUTION COPIED ////////////////////////////////////
+class Solution {
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+
+        while (left < right) {
+            char a = s.charAt(left);
+            char b = s.charAt(right);
+
+            // Convert uppercase to lowercase
+            if (a >= 'A' && a <= 'Z') a = (char)(a + 32);
+            if (b >= 'A' && b <= 'Z') b = (char)(b + 32);
+
+            // Skip non-alphanumeric
+            if (!((a >= 'a' && a <= 'z') || (a >= '0' && a <= '9'))) {
+                left++;
+                continue;
+            }
+            if (!((b >= 'a' && b <= 'z') || (b >= '0' && b <= '9'))) {
+                right--;
+                continue;
+            }
+
+            // Compare
+            if (a != b) return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+///////////////////////////////////////////////// MY SOLUTION //////////////////////////////////////
+class Solution {
+    public boolean isPalindrome(String s) {
+        int l=s.length(),a=l-1;
+        String lower = s.toLowerCase();
+        String plain = "";
+        while (a>=0)
+        {
+           if (lower.charAt(a)>=97 && lower.charAt(a)<=122)
+           { plain += lower.charAt(a); }
+           a--;
+        }
+        int l1=plain.length();
+        String reverse = "";
+        for (int i=l1-1; i>=0; i--)
+        { reverse = reverse + plain.charAt(i); }
+        return plain.equals(reverse);
+    }
+}
+/////////////////////////////ONE TESTCASE NOT PASED/////////////////////////
