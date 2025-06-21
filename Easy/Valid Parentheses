@@ -25,3 +25,67 @@ public:
         return st.empty();
     }
 };
+
+***********************************************************************************************
+                                               JAVA
+***********************************************************************************************
+
+class Solution {
+    public boolean isValid(String s) {
+        // If the string is empty, it's considered valid.
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+
+        // We'll use a character array to simulate a stack.
+        // The maximum size of the stack will be half the string length
+        // because at most half of the characters can be opening brackets.
+        char[] stack = new char[s.length() / 2 + 1]; // +1 for safety, though s.length()/2 is usually enough
+        int top = -1; // Represents the top of the stack
+
+        for (char c : s.toCharArray()) {
+            switch (c) {
+                case '(':
+                case '[':
+                case '{':
+                    // If it's an opening bracket, push it onto the stack.
+                    if (top < stack.length - 1) { // Check for stack overflow (though unlikely with proper sizing)
+                        stack[++top] = c;
+                    } else {
+                        // This case should ideally not be reached with a sufficiently sized stack
+                        return false; // Or throw an error, indicates logic error
+                    }
+                    break;
+                case ')':
+                    // If it's a closing parenthesis, check the top of the stack.
+                    if (top == -1 || stack[top] != '(') {
+                        return false; // Mismatched or no corresponding open bracket
+                    }
+                    top--; // Pop the matching opening bracket
+                    break;
+                case ']':
+                    // If it's a closing square bracket, check the top of the stack.
+                    if (top == -1 || stack[top] != '[') {
+                        return false; // Mismatched or no corresponding open bracket
+                    }
+                    top--; // Pop the matching opening bracket
+                    break;
+                case '}':
+                    // If it's a closing curly bracket, check the top of the stack.
+                    if (top == -1 || stack[top] != '{') {
+                        return false; // Mismatched or no corresponding open bracket
+                    }
+                    top--; // Pop the matching opening bracket
+                    break;
+                default:
+                    // If an unexpected character is found (though constraints say only '()[]{}'),
+                    // the string is invalid.
+                    return false;
+            }
+        }
+
+        // After iterating through the entire string, if the stack is empty,
+        // it means all opening brackets have been correctly closed.
+        return top == -1;
+    }
+}
