@@ -1,0 +1,35 @@
+******************************************************************************************************************************
+                                                             JAVA
+class Solution {
+    public int sumUpToIndexLeft(int arr[], int index) {
+        int sum = 0;
+        for (int i = 0; i < index; i++)
+            sum += arr[i];
+        return sum;
+    }
+
+    public int sumUpToIndexRight(int arr[], int index) {
+        int sum = 0;
+        for (int i = arr.length - 1; i > index; i--)
+            sum += arr[i];
+        return sum;
+    }
+
+    public int pivotIndex(int[] nums) {
+        int n = nums.length;
+        int sumL[] = new int[n];
+        int sumR[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            sumL[i] = sumUpToIndexLeft(nums, i);
+            sumR[i] = sumUpToIndexRight(nums, i);
+        }
+        for (int i = 0; i < n; i++) {
+            if (i == 0 && sumR[i] == 0)
+                return 0;
+            if (sumL[i] == sumR[i])
+                return i;
+        }
+        return -1;
+    }
+}
+******************************************************************************************************************************
