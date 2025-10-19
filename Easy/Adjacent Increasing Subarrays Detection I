@@ -1,0 +1,24 @@
+*********************************************************************************************************************
+                                                       JAVA
+class Solution {
+    public boolean Str_Inc(List<Integer> chk, int i, int k)
+    {
+        for(int j = i; j<i+k-1; j++){
+            if (chk.get(j) >= chk.get(j+1))  return false;
+        }
+        return true;
+    }
+    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+        if (k==1)  return true;
+        int a=0;
+        for(int b=k; b<=nums.size()-k; b++)
+        {
+            if(Str_Inc(nums,a,k) && Str_Inc(nums,b,k))  return true;
+            else if(!Str_Inc(nums,a,k) && !Str_Inc(nums,b,k)) a++;
+            else if(!Str_Inc(nums,a,k) && b>=a+k) a++;
+            else if (!Str_Inc(nums,b,k)) b++;
+        }
+        return false;
+    }
+}
+*********************************************************************************************************************
