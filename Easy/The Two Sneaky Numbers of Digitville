@@ -33,3 +33,26 @@ class Solution {
     }
 }
 *********************************************************************************************************************************
+                                                                ME
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i]))
+                map.put(nums[i], map.get(nums[i]) + 1);
+            else
+                map.put(nums[i], 1);
+        }
+        int ans[] = new int[2];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            if (i == 2) break;
+            if (e.getValue() == 2) {
+                ans[i] = e. getKey();
+                i++;
+            }
+        }
+        return ans;
+    }
+}
+*********************************************************************************************************************************
