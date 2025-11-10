@@ -1,0 +1,17 @@
+***********************************************************************************************************************************
+                                                                 JAVA
+class Solution {
+    public int maxFrequencyElements(int[] nums) {
+        int ele = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int maxFreq =  Collections.max(map.values());
+        for (HashMap.Entry<Integer, Integer> m : map.entrySet()){
+            if (m.getValue() == maxFreq)  ele += m.getValue();
+        }
+        return ele;
+    }
+}
+***********************************************************************************************************************************
