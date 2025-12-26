@@ -1,0 +1,20 @@
+*********************************************************************************************************************************************************
+                                                                            JAVA
+class Solution {
+    public long maximumHappinessSum(int[] happiness, int k) {
+        Arrays.sort(happiness);
+        for( int i = 0; i < happiness.length/2; ++i ) 
+        { 
+           int temp = happiness[i]; 
+           happiness[i] = happiness[happiness.length - i - 1]; 
+           happiness[happiness.length - i - 1] = temp; 
+        }
+        long maxSum = happiness[0];
+        for (int i = 1; i<k; i++)
+        {
+            if ((happiness[i]-i)>0)  maxSum += happiness[i]-i;
+        }
+        return maxSum;
+    }
+}
+*********************************************************************************************************************************************************
