@@ -1,0 +1,33 @@
+******************************************************************************************************************************************************
+                                                                         JAVA
+class Solution {
+    public int maxTwoEvents(int[][] events) {
+        
+        Arrays.sort(events, (a, b) -> a[0] - b[0]);
+
+        
+        PriorityQueue<int[]> pq =
+            new PriorityQueue<>((a, b) -> a[1] - b[1]);
+
+        int maxValSoFar = 0;
+        int ans = 0;
+
+        for (int[] e : events) {
+            int start = e[0], end = e[1], val = e[2];
+
+            
+            while (!pq.isEmpty() && pq.peek()[1] < start) {
+                maxValSoFar = Math.max(maxValSoFar, pq.poll()[2]);
+            }
+
+        
+            ans = Math.max(ans, maxValSoFar + val);
+
+            
+            pq.offer(e);
+        }
+
+        return ans;
+    }
+}
+******************************************************************************************************************************************************
