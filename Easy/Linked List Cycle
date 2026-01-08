@@ -1,0 +1,31 @@
+**************************************************************************************************************************************************
+                                                                          JAVA
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+
+        // Slow pointer moves one step at a time
+        ListNode tortoise = head;
+
+        // Fast pointer moves two steps at a time
+        ListNode hare = head;
+
+        // Traverse while fast pointer is valid
+        while (hare != null && hare.next != null) {
+
+            // Move slow pointer by one node
+            tortoise = tortoise.next;
+
+            // Move fast pointer by two nodes
+            hare = hare.next.next;
+
+            // If both pointers meet, cycle exists
+            if (tortoise == hare) {
+                return true;
+            }
+        }
+
+        // Fast pointer reached the end → no cycle
+        return false;
+    }
+}
+**************************************************************************************************************************************************
