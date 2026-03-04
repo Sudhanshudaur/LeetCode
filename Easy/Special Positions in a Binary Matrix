@@ -1,0 +1,39 @@
+class Solution {
+    private static boolean chkRow(int[][] mat, int rowNo, int colNo) {
+        for (int i = 0; i < mat[0].length; i++) {
+            if (i == colNo)
+                continue;
+            if (mat[rowNo][i] == 1)
+                return false;
+        }
+        return true;
+    }
+
+    private static boolean chkCol(int[][] mat, int rowNo, int colNo) {
+        for (int i = 0; i < mat.length; i++) {
+            if (i == rowNo)
+                continue;
+            if (mat[i][colNo] == 1)
+                return false;
+        }
+        return true;
+    }
+
+    public int numSpecial(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+        int specialPosition = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (mat[i][j] == 1) {
+                    if (chkRow(mat, i, j)) {
+                        if (chkCol(mat, i, j)) {
+                            specialPosition++;
+                        }
+                    }
+                }
+            }
+        }
+        return specialPosition;
+    }
+}
